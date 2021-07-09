@@ -1,0 +1,22 @@
+*, ::after, ::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  background: #222;
+  display: grid;
+  place-items: center;
+}
+
+#play {
+  border: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 1rem;
+  padding: 0.1rem 0.4rem;
+  cursor: pointer;
+}
