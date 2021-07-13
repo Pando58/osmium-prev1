@@ -94,6 +94,8 @@ export default class Player {
     this.musicalPosition.subbeat = 0;
     this.musicalPosition.beat = 0;
     this.musicalPosition.bar = 0;
+    
+    this.project.stop();
   }
 
   togglePlay() {

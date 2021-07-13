@@ -6,6 +6,7 @@ export default class Project {
     this.bpm = bpm || 60;
     this.base = base || 4;
     this.subdivision = subdivision || 1;
+    this.ac = new AudioContext();
 
     this.config = {
       loop: config.loop || false,
@@ -18,7 +19,7 @@ export default class Project {
   }
 
   addTrack(voices) {
-    const track = new Track(this, voices);
+    const track = new Track(this, this.ac, voices);
     this.tracks.push(track);
 
     return track;
@@ -26,5 +27,9 @@ export default class Project {
 
   play(sub, beat, bar) {
     this.tracks.forEach(i => i.play(sub, beat, bar));
+  }
+
+  stop() {
+    this.tracks.forEach(i => i.stop());
   }
 }

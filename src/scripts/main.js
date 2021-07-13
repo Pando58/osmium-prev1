@@ -1,5 +1,4 @@
 import '../styles/main.scss'
-import * as Tone from 'tone'
 
 import Project from './classes/Project'
 import Riff from './classes/Riff'
@@ -14,12 +13,12 @@ const project = new Project({
 });
 
 const track = project.addTrack({
-  1: 'a',
-  2: 'a',
-  3: 'a',
-  4: 'a',
-  5: 'a',
-  6: 'a'
+  1: 'clavinet',
+  2: 'clavinet',
+  3: 'clavinet',
+  4: 'clavinet',
+  5: 'clavinet',
+  6: 'clavinet'
 });
 
 track.addSection(0, 8, new Riff((sub, beat, bar) => {
@@ -103,5 +102,23 @@ Project (bpm, base, subdivision, config)
       play()
       stop()
       togglePlay()
+
+*/
+
+
+
+
+/*
+
+Project
+  - bpm
+  - base
+  - subdivision
+  
+  Tracks
+    Instrument
+    Sections
+      Riffs
+  Player
 
 */

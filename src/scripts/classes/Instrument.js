@@ -1,18 +1,32 @@
-import * as Tone from 'tone'
+import * as Soundfont from 'soundfont-player'
 
 export default class Instrument {
-  constructor(voices) {
+  constructor(ac, voices) {
     this.voices = {};
     for (let key in voices) {
-      this.voices[key] = new Tone.Synth().toDestination();
+      this.voices[key] = new Soundfont.instrument(ac, voices[key]);
     }
   }
 
   play(voice, note) {
-    this.voices[voice].triggerAttack(Math.pow(2, ((note + 0.33)/12) + 3));
+    this.voices[voice].then(inst => {
+      inst.play(String(note));
+    });
   }
 
   stop(voice) {
-    if (voice !== undefined) {} else {}
+    const stop = (inst) => {
+      inst.stop();
+    }
+
+    if (!voice) {
+      for (let key in this.voices) {
+        this.voices[key].then(stop);
+      }
+
+      return;
+    }
+
+    this.voices[voice].then(stop);
   }
 }
