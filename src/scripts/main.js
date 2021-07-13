@@ -8,7 +8,7 @@ const project = new Project({
   base: 4,
   subdivision: 4
 }, {
-  loop: true,
+  loop: false,
   end: 16
 });
 
@@ -48,7 +48,7 @@ track.addSection(12, 16, new Riff((sub, beat, bar) => {
 
 
 document.getElementById('play').onclick = () => {
-  project.player.togglePlay();
+  project.timeTracker.togglePlay();
 }
 
 

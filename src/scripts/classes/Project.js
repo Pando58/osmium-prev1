@@ -1,4 +1,4 @@
-import Player from './Player'
+import TimeTracker from './TimeTracker'
 import Track from './Track'
 
 export default class Project {
@@ -15,7 +15,7 @@ export default class Project {
 
     this.tracks = [];
 
-    this.player = new Player(this);
+    this.timeTracker = new TimeTracker(this);
   }
 
   addTrack(voices) {
