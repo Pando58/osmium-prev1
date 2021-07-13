@@ -17,8 +17,8 @@ export default class Project {
     this.player = new Player(this);
   }
 
-  addTrack() {
-    const track = new Track(this);
+  addTrack(voices) {
+    const track = new Track(this, voices);
     this.tracks.push(track);
 
     return track;

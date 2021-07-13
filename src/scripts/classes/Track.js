@@ -2,18 +2,11 @@ import Section from './Section'
 import Instrument from './Instrument'
 
 export default class Track {
-  constructor(project) {
+  constructor(project, voices) {
     this.project = project;
 
     this.sections = [];
-    this.instrument = new Instrument({
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0,
-      6: 0
-    });
+    this.instrument = new Instrument(voices);
     
     this.endTime = 0;
   }
@@ -30,6 +23,17 @@ export default class Track {
   sortSections() {}
 
   play(sub, beat, bar) {
-    this.sections.forEach(i => i.play(sub, beat, bar));
+    const sec = this.sections.find(i => i.start <= bar && i.duration > bar);
+
+    if (sec) {
+      const notes = sec.getNotes(sub - (sec.start * this.project.base * this.project.subdivision), beat, bar - sec.start);
+
+      if (notes) {
+        Object.keys(notes).forEach(i => {
+          // if (!this.sustain) this.instrument.stop();
+          this.instrument.play(i, notes[i]);
+        });
+      }
+    }
   }
 }

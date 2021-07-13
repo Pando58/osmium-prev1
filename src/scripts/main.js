@@ -1,4 +1,5 @@
 import '../styles/main.scss'
+import * as Tone from 'tone'
 
 import Project from './classes/Project'
 import Riff from './classes/Riff'
@@ -9,24 +10,48 @@ const project = new Project({
   subdivision: 4
 }, {
   loop: true,
-  end: 4
+  end: 16
 });
 
-const track = project.addTrack();
+const track = project.addTrack({
+  1: 'a',
+  2: 'a',
+  3: 'a',
+  4: 'a',
+  5: 'a',
+  6: 'a'
+});
 
-const section = track.addSection(0, 4, new Riff((sub, beat, bar) => {
-  const p = '000 0 0 000 0 0 000 0 0 0 0 000 0 0 000 0 0 000 ';
+track.addSection(0, 8, new Riff((sub, beat, bar) => {
+  const p = '0102  0 0 0102  0 0 010';
   
-  return p[sub % p.length] === '0' ? {6: 46} : null;
+  if (p[sub % p.length] === '0') { return { 6: 46 } }
+  if (p[sub % p.length] === '1') { return { 6: 47 } }
+  if (p[sub % p.length] === '2') { return { 6: 48 } }
 }));
+
+track.addSection(8, 12, new Riff((sub, beat, bar) => {
+  const p = '0102  0  0  0102  0 0   ';
+  
+  if (p[sub % p.length] === '0') { return { 6: 46 } }
+  if (p[sub % p.length] === '1') { return { 6: 47 } }
+  if (p[sub % p.length] === '2') { return { 6: 48 } }
+}));
+
+track.addSection(12, 16, new Riff((sub, beat, bar) => {
+  const p = '0102  0  0  0102  0 0   ';
+  
+  if (p[sub % p.length] === '0') { return { 6: 46 } }
+  if (p[sub % p.length] === '1') { return { 6: 47 } }
+  if (p[sub % p.length] === '2') { return { 6: 48 } }
+}));
+
+
 
 document.getElementById('play').onclick = () => {
   project.player.togglePlay();
 }
 
-console.log(project);
-console.log(track);
-console.log(section);
 
 
 

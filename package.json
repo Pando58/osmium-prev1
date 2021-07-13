@@ -8,5 +8,8 @@
   "devDependencies": {
     "sass": "^1.35.1",
     "vite": "^2.4.0"
+  },
+  "dependencies": {
+    "tone": "^14.7.77"
   }
 }

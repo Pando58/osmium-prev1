@@ -5,7 +5,7 @@ export default class Section {
     this.riff = riff;
   }
 
-  play(sub, beat, bar) {
-    this.riff.play(sub, beat, bar);
+  getNotes(sub, beat, bar) {
+    return this.riff.play(sub, beat, bar);
   }
 }
