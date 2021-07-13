@@ -4,12 +4,11 @@ import Project from './classes/Project'
 import Riff from './classes/Riff'
 
 const project = new Project({
-  bpm: 155,
-  base: 4,
-  subdivision: 4
+  bpm: 180,
+  base: 4
 }, {
   loop: true,
-  end: 16
+  end: 9.75
 });
 
 const track = project.addTrack({
@@ -21,30 +20,113 @@ const track = project.addTrack({
   6: 'clavinet'
 });
 
-track.addSection(0, 8, new Riff((sub, beat, bar) => {
-  const p = '0102  0 0 0102  0 0 010';
-  
-  if (p[sub % p.length] === '0') { return { 6: 46 } }
-  if (p[sub % p.length] === '1') { return { 6: 47 } }
-  if (p[sub % p.length] === '2') { return { 6: 48 } }
-}));
 
-track.addSection(8, 12, new Riff((sub, beat, bar) => {
-  const p = '0102  0  0  0102  0 0   ';
-  
-  if (p[sub % p.length] === '0') { return { 6: 46 } }
-  if (p[sub % p.length] === '1') { return { 6: 47 } }
-  if (p[sub % p.length] === '2') { return { 6: 48 } }
-}));
+track.addSection({
+  start: 0,
+  end: 8,
+  subdivision: 4,
+  riff: new Riff(step => {
+    const p = '  000   ';
 
-track.addSection(12, 16, new Riff((sub, beat, bar) => {
-  const p = '0102  0  0  0102  0 0   ';
-  
-  if (p[sub % p.length] === '0') { return { 6: 46 } }
-  if (p[sub % p.length] === '1') { return { 6: 47 } }
-  if (p[sub % p.length] === '2') { return { 6: 48 } }
-}));
+    if (p[step % p.length] === '0') return { 6: 38 };
+  })
+});
 
+track.addSection({
+  start: 8,
+  end: 12,
+  subdivision: 3,
+  riff: new Riff(step => {
+    const p = '0000000     ';
+
+    if (p[step % p.length] === '0') return { 6: 38 };
+  })
+});
+
+track.addSection({
+  start: 12,
+  end: 16,
+  subdivision: 4,
+  riff: new Riff(step => {
+    const p = '000000000       ';
+
+    if (p[step % p.length] === '0') return { 6: 38 };
+  })
+});
+
+track.addSection({
+  start: 16,
+  end: 24,
+  subdivision: 3,
+  riff: new Riff(step => {
+    const p = ' 000000000000000000     ';
+
+    if (p[step % p.length] === '0') return { 6: 38 };
+  })
+});
+
+track.addSection({
+  start: 24,
+  end: 32,
+  subdivision: 4,
+  riff: new Riff(step => {
+    const p = '000         000   000           ';
+
+    if (p[step % p.length] === '0') return { 6: 38 };
+  })
+});
+
+track.addSection({
+  start: 32,
+  end: 39,
+  subdivision: 4,
+  riff: new Riff(step => {
+    const p = '00000000000000000 000 0   0 ';
+
+    if (p[step % p.length] === '0') return { 6: 38 };
+  })
+});
+
+
+/* 
+track.addSection({
+  start: 0,
+  end: 8 * 4,
+  subdivision: 4,
+  riff: new Riff(step => {
+    const p = '0102  0 0 0102  0 0 010';
+    
+    if (p[step % p.length] === '0') { return { 6: 46 } }
+    if (p[step % p.length] === '1') { return { 6: 47 } }
+    if (p[step % p.length] === '2') { return { 6: 48 } }
+  })
+});
+
+track.addSection({
+  start: 8 * 4,
+  end: 12 * 4,
+  subdivision: 4,
+  riff: new Riff(step => {
+    const p = '0102  0  0  0102  0 0   ';
+    
+    if (p[step % p.length] === '0') { return { 6: 46 } }
+    if (p[step % p.length] === '1') { return { 6: 47 } }
+    if (p[step % p.length] === '2') { return { 6: 48 } }
+  })
+});
+
+track.addSection({
+  start: 8 * 4,
+  end: 12 * 4,
+  subdivision: 4,
+  riff: new Riff(step => {
+    const p = '0102  0  0  0102  0 0   ';
+    
+    if (p[step % p.length] === '0') { return { 6: 46 } }
+    if (p[step % p.length] === '1') { return { 6: 47 } }
+    if (p[step % p.length] === '2') { return { 6: 48 } }
+  })
+}); */
 
 
 document.getElementById('play').onclick = () => {
@@ -60,7 +142,6 @@ document.getElementById('play').onclick = () => {
 Project (bpm, base, subdivision, config)
   - bpm
   - base
-  - subdivision
   - config {
     loop?
   }
@@ -77,6 +158,7 @@ Project (bpm, base, subdivision, config)
     Sections (start, duration, riff)
       - start
       - duration
+      - subdivision
       play(sub, beat, bar) -> Riff
 
       Riff (fn)
@@ -96,29 +178,10 @@ Project (bpm, base, subdivision, config)
 
       loop(delta)
       deltaTime(ts, last_ts)
-      subbeat()
       beat()
       bar()
       play()
       stop()
       togglePlay()
-
-*/
-
-
-
-
-/*
-
-Project
-  - bpm
-  - base
-  - subdivision
-  
-  Tracks
-    Instrument
-    Sections
-      Riffs
-  Player
 
 */

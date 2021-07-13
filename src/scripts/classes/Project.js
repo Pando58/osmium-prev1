@@ -2,10 +2,9 @@ import TimeTracker from './TimeTracker'
 import Track from './Track'
 
 export default class Project {
-  constructor({ bpm, base, subdivision } = {}, config = {}) {
+  constructor({ bpm, base } = {}, config = {}) {
     this.bpm = bpm || 60;
     this.base = base || 4;
-    this.subdivision = subdivision || 1;
     this.ac = new AudioContext();
 
     this.config = {
@@ -24,6 +23,15 @@ export default class Project {
 
     return track;
   }
+
+
+  tick(time) {
+    this.tracks.forEach(i => i.tick(time));
+  }
+  
+  
+  
+  
 
   play(sub, beat, bar) {
     this.tracks.forEach(i => i.play(sub, beat, bar));

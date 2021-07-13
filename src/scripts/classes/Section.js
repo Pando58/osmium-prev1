@@ -1,11 +1,26 @@
 export default class Section {
-  constructor(start, duration, riff) {
+  constructor(start, end, subdivision, riff) {
     this.start = start;
-    this.duration = duration;
+    this.end = end;
+    this.subdivision = subdivision;
     this.riff = riff;
+
+    this.step = -1;
   }
 
-  getNotes(sub, beat, bar) {
-    return this.riff.play(sub, beat, bar);
+  getNotes(time) {
+    const localTime = time - this.start;
+    const nextStep = Math.floor(localTime * this.subdivision);
+    
+    if (this.step !== nextStep) {
+      this.step = nextStep;
+      return this.riff.play(this.step);
+    }
+
+    return null;
   }
+  
+  // getNotes(sub, beat, bar) {
+  //   return this.riff.play(sub, beat, bar);
+  // }
 }

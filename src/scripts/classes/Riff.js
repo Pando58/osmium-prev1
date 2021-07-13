@@ -3,7 +3,7 @@ export default class Riff {
     this.fn = fn;
   }
 
-  play(sub, beat, bar) {
-    return this.fn(sub, beat, bar);
+  play(step) {
+    return this.fn(step) || {};
   }
 }

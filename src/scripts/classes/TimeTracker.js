@@ -19,12 +19,12 @@ export default class Player {
   }
 
   loop(delta) {
-    const { bpm, subdivision, base } = this.project;
+    const { bpm, base } = this.project;
 
     this.position += delta;
 
     // Check ending and loop
-    if (Math.floor(((this.position / 1000) * (bpm / 60)) / base) >= this.project.config.end) {
+    if (((this.position / 1000) * (bpm / 60)) / base >= this.project.config.end) {
       this.position = 0;
 
       if (!this.project.config.loop) {
@@ -32,9 +32,11 @@ export default class Player {
       }
     }
 
+    // console.log( ((this.position / 1000) * (bpm / 60)).toFixed(2) );
+    this.project.tick( ((this.position / 1000) * (bpm / 60)).toFixed(2) );
+
     // Execute play functions
     const pos = this.position / 1000;
-    const sub = Math.floor((pos * (bpm / 60)) * subdivision);
     const beat = Math.floor(pos * (bpm / 60));
     const bar = Math.floor((pos * (bpm / 60)) / base);
 
@@ -46,11 +48,6 @@ export default class Player {
     if (this.musicalPosition.beat != beat) {
       this.musicalPosition.beat = beat;
       this.beat();
-    }
-
-    if (this.musicalPosition.subbeat != sub) {
-      this.musicalPosition.subbeat = sub;
-      this.subbeat();
     }
   }
 
@@ -69,24 +66,13 @@ export default class Player {
     });
   }
 
-  subbeat() {
-    this.project.play(
-      this.musicalPosition.subbeat,
-      this.musicalPosition.beat,
-      this.musicalPosition.bar
-    );
-
-    console.log(`%c ${this.musicalPosition.subbeat}     Sub`, 'background: #222; color: #bada55');
-    if (this.metronomeOn) this.sfMetronome.then(inst => inst.play(this.metronomePitch, 0, { gain: this.metronomeGain * 0.2 }));
-  }
-
   beat() {
-    console.log(`%c ${this.musicalPosition.beat}   Beat`, 'background: #222; color: #477eff');
+    // console.log(`%c ${this.musicalPosition.beat}   Beat`, 'background: #222; color: #477eff');
     if (this.metronomeOn) this.sfMetronome.then(inst => inst.play(this.metronomePitch, 0, { gain: this.metronomeGain * 0.6 }));
   }
 
   bar() {
-    console.log(`%c ${this.musicalPosition.bar} Bar`, 'background: #222; color: #ff3721');
+    // console.log(`%c ${this.musicalPosition.bar} Bar`, 'background: #222; color: #ff3721');
     if (this.metronomeOn) this.sfMetronome.then(inst => inst.play(this.metronomePitch, 0, { gain: this.metronomeGain }));
   }
 
@@ -96,7 +82,6 @@ export default class Player {
     requestAnimationFrame((timestamp) => {
       this.bar();
       this.beat();
-      this.subbeat();
 
       this.deltaTime(timestamp);
     })
