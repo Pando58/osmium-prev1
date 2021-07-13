@@ -24,17 +24,8 @@ export default class Project {
     return track;
   }
 
-
   tick(time) {
     this.tracks.forEach(i => i.tick(time));
-  }
-  
-  
-  
-  
-
-  play(sub, beat, bar) {
-    this.tracks.forEach(i => i.play(sub, beat, bar));
   }
 
   stop() {

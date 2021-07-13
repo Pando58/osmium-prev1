@@ -19,8 +19,4 @@ export default class Section {
 
     return null;
   }
-  
-  // getNotes(sub, beat, bar) {
-  //   return this.riff.play(sub, beat, bar);
-  // }
 }

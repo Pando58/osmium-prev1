@@ -15,12 +15,8 @@ export default class Track {
     const section = new Section(start, end, subdivision, riff);
     this.sections.push(section);
 
-    this.sortSections();
-
     return section;
   }
-
-  sortSections() {}
 
 
   tick(time) {
@@ -34,25 +30,6 @@ export default class Track {
         });
       }
     });
-  }
-  
-  
-  
-  
-
-  play(sub, beat, bar) {
-    const sec = this.sections.find(i => i.start <= bar && i.duration > bar);
-
-    if (sec) {
-      const notes = sec.getNotes(sub - (sec.start * this.project.base * this.project.subdivision), beat, bar - sec.start);
-
-      if (notes) {
-        Object.keys(notes).forEach(i => {
-          this.player.stop();
-          this.player.play(i, notes[i]);
-        });
-      }
-    }
   }
 
   stop() {
