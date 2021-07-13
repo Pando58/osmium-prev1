@@ -1,12 +1,12 @@
 import Section from './Section'
-import Instrument from './Instrument'
+import Player from './Player'
 
 export default class Track {
   constructor(project, ac, voices) {
     this.project = project;
 
     this.sections = [];
-    this.instrument = new Instrument(ac, voices);
+    this.player = new Player(ac, voices);
     
     this.endTime = 0;
   }
@@ -30,14 +30,14 @@ export default class Track {
 
       if (notes) {
         Object.keys(notes).forEach(i => {
-          this.instrument.stop();
-          this.instrument.play(i, notes[i]);
+          this.player.stop();
+          this.player.play(i, notes[i]);
         });
       }
     }
   }
 
   stop() {
-    this.instrument.stop();
+    this.player.stop();
   }
 }
