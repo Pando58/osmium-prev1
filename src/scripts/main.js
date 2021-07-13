@@ -8,7 +8,7 @@ const project = new Project({
   base: 4,
   subdivision: 4
 }, {
-  loop: false,
+  loop: true,
   end: 16
 });
 
@@ -83,13 +83,13 @@ Project (bpm, base, subdivision, config)
         - fn
         play(subbeat, beat, bar) -> Get corresponding notes
     
-    Instrument (voices)
+    Player (voices)
       - voices
       
       play(voice, note)
       stop(voice?)
 
-  Player (project)
+  TimeTracker (project)
     - playing
     - position
     - musicalPosition { bar, beat, subbeat }
