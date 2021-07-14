@@ -77,6 +77,8 @@ export default class Player {
   }
 
   play() {
+    if (this.playing) return;
+    
     this.playing = true;
 
     requestAnimationFrame((timestamp) => {

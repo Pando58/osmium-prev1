@@ -75,5 +75,5 @@ track.addSection({
 
 
 document.getElementById('play').onclick = () => {
-  project.timeTracker.togglePlay();
+  project.togglePlay();
 }

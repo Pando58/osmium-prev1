@@ -31,4 +31,12 @@ export default class Project {
   stop() {
     this.tracks.forEach(i => i.stop());
   }
+
+  play() {
+    this.timeTracker.play();
+  }
+
+  togglePlay() {
+    this.timeTracker.togglePlay();
+  }
 }
