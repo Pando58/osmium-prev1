@@ -25,11 +25,12 @@ export default class Player {
 
     // Check ending and loop
     if (((this.position / 1000) * (bpm / 60)) / base >= this.project.config.end) {
-      this.position = 0;
-
       if (!this.project.config.loop) {
         this.stop();
+        return;
       }
+      
+      this.position = 0;
     }
 
     // console.log( ((this.position / 1000) * (bpm / 60)).toFixed(2) );
