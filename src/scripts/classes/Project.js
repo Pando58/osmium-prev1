@@ -17,8 +17,8 @@ export default class Project {
     this.timeTracker = new TimeTracker(this);
   }
 
-  addTrack(voices) {
-    const track = new Track(this, this.ac, voices);
+  addTrack(instrument) {
+    const track = new Track(this.ac, instrument);
     this.tracks.push(track);
 
     return track;

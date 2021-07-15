@@ -4,6 +4,6 @@ export default class Riff {
   }
 
   play(step) {
-    return this.fn(step) || {};
+    return this.fn(step) || null;
   }
 }

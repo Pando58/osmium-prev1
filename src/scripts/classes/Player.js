@@ -1,6 +1,6 @@
 import * as Soundfont from 'soundfont-player'
 
-export default class Instrument {
+export default class Player {
   constructor(ac, voices) {
     this.voices = {};
     for (let key in voices) {

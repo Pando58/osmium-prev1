@@ -1,14 +1,18 @@
 import Section from './Section'
-import Player from './Player'
+import Guitar from './instruments/Guitar'
 
 export default class Track {
-  constructor(project, ac, voices) {
-    this.project = project;
+  constructor(ac, instrument) {
+    this.ac = ac;
 
     this.sections = [];
-    this.player = new Player(ac, voices);
+    this.instrument = this.getInstrument(instrument);
     
     this.endTime = 0;
+  }
+
+  getInstrument(instrument) {
+    return new Guitar(this.ac);
   }
 
   addSection({ start, end, subdivision, riff } = {}) {
@@ -24,16 +28,14 @@ export default class Track {
       const notes = i.getNotes(time);
 
       if (notes) {
-        Object.keys(notes).forEach(i => {
-          this.player.stop();
-          this.player.play(i, notes[i]);
-        });
+        this.instrument.stop();
+        this.instrument.play(notes);
       }
     });
   }
 
   stop() {
-    this.player.stop();
+    this.instrument.stop();
 
     this.sections.forEach(i => i.step = -1);
   }
