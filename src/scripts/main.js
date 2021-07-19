@@ -150,6 +150,8 @@ track.addSection({
 
 document.getElementById('play').onclick = async () => {
   await Tone.start();
-  project.togglePlay();
-  // project.timeTracker.position = 132000;
+  
+  Tone.loaded().then(() => {
+    project.togglePlay();
+  });
 }
