@@ -36,7 +36,7 @@ export default class Player {
     }
 
     // console.log( ((this.position / 1000) * (bpm / 60)).toFixed(2) );
-    this.project.tick( ((this.position / 1000) * (bpm / 60)).toFixed(2) );
+    this.project.tick( ((this.position / 1000) * (bpm / 60)) );
 
     // For testing metronome
     const pos = this.position / 1000;
