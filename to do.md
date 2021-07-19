@@ -1,12 +1,15 @@
 - [✓] Use subdivision in sections instead of the project
 - [✓] Use beats instead of bars for setting start and end in sections
-- [-] Choose to set time in bars or beats for sections
+- [X] Choose to set time in bars or beats for sections
+- [X] Check how to implement custom soundfonts
 - [✓] Check first note playing when stopping at project end
-- [ ] Sort sections and calculate automatically where project ends
-- [ ] Check how to implement custom soundfonts
+- [/] Switch to Tone.js and use samples
 - [/] Implement easier to use instruments like guitar, which has 6 strings and can take fret numbers as notes
+- [✓] Check how to wait to play until it's fully loaded
+- [ ] Add function to time tracker to set position based on bars instead of seconds
+- [ ] Sort sections and calculate automatically where project ends
 - [ ] Not only send notes in riffs, also send "messages" like mute all strings, palm mute, pinch harmonic
   - [ ] Add an internal state for riffs (e.g. switching sustain, riff changes)
 - [ ] Ending riffs for sections
 - [ ] Sub-sections: Create sections that act like riffs repeating for creating other sections
-- [ ] Check how to wait to play until it's fully loaded
+- [ ] Save and load projects in probably JSON format

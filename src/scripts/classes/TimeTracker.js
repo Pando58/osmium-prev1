@@ -1,4 +1,5 @@
-import * as Soundfont from 'soundfont-player'
+import * as Tone from 'tone'
+import hhat from '../../sounds/drum_kit/metronome/Hi Hat 14.wav'
 
 export default class Player {
   constructor(project) {
@@ -12,10 +13,11 @@ export default class Player {
       bar: 0
     }
 
-    this.sfMetronome = Soundfont.instrument(this.project.ac, 'agogo');
-    this.metronomeOn = true;
-    this.metronomeGain = 0.6;
-    this.metronomePitch = 70;
+    this.metronomeOn = false;
+    
+    this.metronomeSampler = new Tone.Sampler({
+      C3: hhat
+    }).toDestination();
   }
 
   loop(delta) {
@@ -69,12 +71,12 @@ export default class Player {
 
   beat() {
     // console.log(`%c ${this.musicalPosition.beat}   Beat`, 'background: #222; color: #477eff');
-    if (this.metronomeOn) this.sfMetronome.then(inst => inst.play(this.metronomePitch, 0, { gain: this.metronomeGain * 0.6 }));
+    if (this.metronomeOn) this.metronomeSampler.triggerAttackRelease('C3', 1);
   }
 
   bar() {
     // console.log(`%c ${this.musicalPosition.bar} Bar`, 'background: #222; color: #ff3721');
-    if (this.metronomeOn) this.sfMetronome.then(inst => inst.play(this.metronomePitch, 0, { gain: this.metronomeGain }));
+    // if (this.metronomeOn) this.sfMetronome.then(inst => inst.play(this.metronomePitch, 0, { gain: this.metronomeGain }));
   }
 
   play() {

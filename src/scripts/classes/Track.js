@@ -1,5 +1,11 @@
 import Section from './Section'
-import Guitar from './instruments/Guitar'
+
+import Kick from './instruments/Kick'
+import Snare from './instruments/Snare'
+import HHat from './instruments/HHat'
+import Crash from './instruments/Crash'
+import China from './instruments/China'
+import MidTom from './instruments/MidTom'
 
 export default class Track {
   constructor(ac, instrument) {
@@ -12,7 +18,20 @@ export default class Track {
   }
 
   getInstrument(instrument) {
-    return new Guitar(this.ac);
+    const map = {
+      'kick': Kick,
+      'snare': Snare,
+      'hhat': HHat,
+      'crash': Crash,
+      'china': China,
+      'midTom': MidTom
+    };
+
+    if (map.hasOwnProperty(instrument)) {
+      return new map[instrument]();
+    }
+
+    return new Kick();
   }
 
   addSection({ start, end, subdivision, riff } = {}) {
