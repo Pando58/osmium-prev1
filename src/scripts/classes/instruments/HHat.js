@@ -8,7 +8,7 @@ export default class HHat {
     }).toDestination();
 
     this.sampler.set({
-      volume: -8
+      volume: -11
     });
   }
 

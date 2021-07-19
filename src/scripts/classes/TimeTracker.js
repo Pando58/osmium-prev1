@@ -109,4 +109,16 @@ export default class Player {
       this.play();
     }
   }
+  
+  setPositionInSeconds(position) {
+    this.position = position * 1000;
+  }
+
+  setPositionInBeats(position) {
+    this.position = position / (this.project.bpm / 60) * 1000;
+  }
+
+  setPositionInBars(position) {
+    this.position = (position * this.project.base) / (this.project.bpm / 60) * 1000;
+  }
 }
