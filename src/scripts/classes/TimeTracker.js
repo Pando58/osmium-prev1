@@ -25,8 +25,8 @@ export default class Player {
 
     this.position += delta;
 
-    // Check ending and loop
-    if (((this.position / 1000) * (bpm / 60)) / base >= this.project.config.end) {
+    // Check ending and loop    
+    if (((this.position / 1000) * (bpm / 60)) >= this.project.end) {
       if (!this.project.config.loop) {
         this.stop();
         return;

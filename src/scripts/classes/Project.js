@@ -8,9 +8,10 @@ export default class Project {
     this.ac = new AudioContext();
 
     this.config = {
-      loop: config.loop || false,
-      end: config.end || 0
+      loop: config.loop || false
     }
+
+    this.end = 0;
 
     this.tracks = [];
 
@@ -18,7 +19,7 @@ export default class Project {
   }
 
   addTrack(instrument) {
-    const track = new Track(this.ac, instrument);
+    const track = new Track(this, instrument);
     this.tracks.push(track);
 
     return track;
@@ -38,5 +39,25 @@ export default class Project {
 
   togglePlay() {
     this.timeTracker.togglePlay();
+  }
+
+  calculateEndPosition() {
+    let end = 0;
+
+    this.tracks.forEach(track => {
+      let finalPosition = 0;
+
+      track.sections.forEach(section => {
+        if (section.end > finalPosition) {
+          finalPosition = section.end;
+        }
+      });
+
+      if (finalPosition > end) {
+        end = finalPosition;
+      }
+    });
+
+    this.end = end;
   }
 }

@@ -8,8 +8,9 @@ import China from './instruments/China'
 import MidTom from './instruments/MidTom'
 
 export default class Track {
-  constructor(ac, instrument) {
-    this.ac = ac;
+  constructor(project, instrument) {
+    this.project = project;
+    this.ac = project.ac;
 
     this.sections = [];
     this.instrument = this.getInstrument(instrument);
@@ -38,6 +39,8 @@ export default class Track {
     const section = new Section(start, end, subdivision, riff);
     this.sections.push(section);
 
+    this.project.calculateEndPosition();
+    
     return section;
   }
 

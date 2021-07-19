@@ -8,8 +8,7 @@ const project = new Project({
   bpm: 149,
   base: 4
 }, {
-  loop: true,
-  end: 17
+  loop: true
 });
 
 const trackKick = project.addTrack('kick');
