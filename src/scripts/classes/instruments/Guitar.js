@@ -1,4 +1,4 @@
-import { Sampler, now } from 'tone'
+import { Sampler } from 'tone'
 
 import Eb2 from '../../../sounds/guitar/Eb2.wav'
 import Gb2 from '../../../sounds/guitar/Gb2.wav'
@@ -37,10 +37,6 @@ export default class Guitar {
       '6': new Sampler(notes).toDestination(),
       '7': new Sampler(notes).toDestination()
     };
-
-    // this.sampler.set({
-    //   volume: -13
-    // });
   }
 
   play(strings = []) {
@@ -65,10 +61,6 @@ export default class Guitar {
       if (this.voices.hasOwnProperty(string)) {
         this.voices[string].triggerAttack(8 * Math.pow(2, (+stringOffsets[string] + +fret) / 12));
       }
-      
-      
-      
-      // this.player.play(string, +stringOffsets[string] + +fret);
     }
   }
 

@@ -6,7 +6,7 @@ import HHat from './instruments/HHat'
 import Crash from './instruments/Crash'
 import China from './instruments/China'
 import MidTom from './instruments/MidTom'
-import Guitar from './instruments/NewGuitar'
+import Guitar from './instruments/Guitar'
 
 export default class Track {
   constructor(project, instrument) {
