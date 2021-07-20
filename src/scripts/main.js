@@ -16,6 +16,7 @@ const trackSnare = project.addTrack('snare');
 const trackChina = project.addTrack('china');
 const trackCrash = project.addTrack('crash');
 const trackHHat = project.addTrack('hhat');
+const trackGuitar = project.addTrack('guitar');
 
 
 trackKick.addSection({ start: 0, end: 8 * 4, subdivision: 4,
@@ -23,6 +24,15 @@ trackKick.addSection({ start: 0, end: 8 * 4, subdivision: 4,
     const p = '000 0000 0000 000000 0000 0000  ';
 
     if (p[step % p.length] === '0') return [{ play: true }];
+  })
+});
+
+trackGuitar.addSection({ start: 0, end: 8 * 4, subdivision: 4,
+  riff: new Riff(step => {
+    const p = '606 0606 0606 060606 0606 0606  ';
+
+    if (p[step % p.length] === '0') return [{ string: '7', fret: 0 }];
+    if (p[step % p.length] === '6') return [{ string: '7', fret: 6 }];
   })
 });
 
@@ -68,6 +78,16 @@ trackSnare.addSection({ start: 8 * 4, end: 9 * 4, subdivision: 4,
   })
 });
 
+trackGuitar.addSection({ start: 8 * 4, end: 9 * 4, subdivision: 4,
+  riff: new Riff(step => {
+    const p = '201 0201 0201   ';
+
+    if (p[step % p.length] === '0') return [{ string: '7', fret: '0' }];
+    if (p[step % p.length] === '1') return [{ string: '7', fret: '1' }];
+    if (p[step % p.length] === '2') return [{ string: '7', fret: '2' }];
+  })
+});
+
 trackCrash.addSection({ start: 8 * 4, end: 9 * 4, subdivision: 1,
   riff: new Riff(step => {
     const p = '0   ';
@@ -91,6 +111,17 @@ trackSnare.addSection({ start: 9 * 4, end: 17 * 4, subdivision: 4,
     const p = '0    ';
 
     if (p[step % p.length] === '0') return [{ play: true }];
+  })
+});
+
+trackGuitar.addSection({
+  start: 9 * 4,
+  end: 17 * 4,
+  subdivision: 4,
+  riff: new Riff(step => {
+    const p = '222 2';
+
+    if (p[step % p.length] === '2') return [{ string: '7', fret: '3' }, { string: '6', fret: '5' }, ];
   })
 });
 

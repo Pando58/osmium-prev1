@@ -6,6 +6,7 @@ import HHat from './instruments/HHat'
 import Crash from './instruments/Crash'
 import China from './instruments/China'
 import MidTom from './instruments/MidTom'
+import Guitar from './instruments/NewGuitar'
 
 export default class Track {
   constructor(project, instrument) {
@@ -25,7 +26,8 @@ export default class Track {
       'hhat': HHat,
       'crash': Crash,
       'china': China,
-      'midTom': MidTom
+      'midTom': MidTom,
+      'guitar': Guitar
     };
 
     if (map.hasOwnProperty(instrument)) {
