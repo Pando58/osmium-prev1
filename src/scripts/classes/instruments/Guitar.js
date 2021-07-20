@@ -42,14 +42,16 @@ export default class Guitar extends Instrument {
     });
   }
 
-  triggerSound(strings = []) {
-    for (let key in this.voices) {
-      this.voices[key].releaseAll();
-    }
+  triggerSound({ action, notes = [] } = {}) {
+    // Actions
+    if (action == 'mute') this.muteNotes();
     
-    for (let i = 0; i < strings.length; i++) {
-      const string = strings[i].string + '';
-      const fret = strings[i].fret + '';
+    // Notes
+    if (notes.length > 0) this.muteNotes();
+    
+    for (let i = 0; i < notes.length; i++) {
+      const string = notes[i].string + '';
+      const fret = notes[i].fret + '';
       
       const stringOffsets = {
         '7': 40-1-5,
@@ -68,6 +70,12 @@ export default class Guitar extends Instrument {
   }
 
   stop() {
+    for (let key in this.voices) {
+      this.voices[key].releaseAll();
+    }
+  }
+
+  muteNotes() {
     for (let key in this.voices) {
       this.voices[key].releaseAll();
     }

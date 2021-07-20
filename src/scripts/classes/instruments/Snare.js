@@ -12,6 +12,6 @@ export default class Snare extends Instrument {
   }
 
   triggerSound() {
-    this.voices['1'].triggerAttackRelease(['C3'], 5);
+    this.voices['1'].triggerAttackRelease('C3');
   }
 }
