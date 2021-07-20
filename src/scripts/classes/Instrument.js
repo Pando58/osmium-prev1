@@ -1,34 +1,17 @@
-import Player from './Player'
+import { Sampler } from 'tone'
 
 export default class Instrument {
-  constructor(ac, voices) {
-    this.player = new Player(ac, voices);
+  constructor(voices) {
+    this.voices = {};
+
+    for (let key in voices) {
+      this.voices[key] = new Sampler(voices[key]).toDestination();
+    }
   }
 
+  triggerSound() {}
+  
   play() {}
 
-  stop() {
-    this.player.stop();
-  }
+  stop() {}
 }
-
-
-
-/* 
-
-
-GUITAR
-
-play({
-  string: ,
-  fret: ,
-})
-
-DRUMS
-
-play({
-  inst: ,
-})
-
-
-*/

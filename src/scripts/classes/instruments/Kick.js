@@ -1,16 +1,17 @@
-import { Sampler } from 'tone'
+import Instrument from '../Instrument'
+
 import kick_01 from '../../../sounds/drum_kit/kick/kick_01.wav'
 
-export default class Kick {
+export default class Kick extends Instrument {
   constructor() {
-    this.sampler = new Sampler({
-      C3: kick_01
-    }).toDestination();
+    super({
+      '1': {
+        C3: kick_01
+      }
+    });
   }
 
-  play() {
-    this.sampler.triggerAttackRelease(['C3'], 5);
+  triggerSound() {
+    this.voices['1'].triggerAttack('C3');
   }
-
-  stop() {}
 }

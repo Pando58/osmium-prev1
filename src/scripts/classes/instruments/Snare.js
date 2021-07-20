@@ -1,16 +1,17 @@
-import { Sampler } from 'tone'
+import Instrument from '../Instrument'
+
 import snare_01 from '../../../sounds/drum_kit/snare/snare_01.wav'
 
-export default class Snare {
+export default class Snare extends Instrument {
   constructor() {
-    this.sampler = new Sampler({
-      C3: snare_01
-    }).toDestination();
+    super({
+      '1': {
+        C3: snare_01
+      }
+    });
   }
 
-  play() {
-    this.sampler.triggerAttackRelease(['C3'], 5);
+  triggerSound() {
+    this.voices['1'].triggerAttackRelease(['C3'], 5);
   }
-
-  stop() {}
 }

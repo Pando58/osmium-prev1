@@ -52,10 +52,13 @@ export default class Track {
       const notes = i.getNotes(time);
 
       if (notes) {
-        this.instrument.stop();
-        this.instrument.play(notes);
+        this.instrument.triggerSound(notes);
       }
     });
+  }
+
+  play() {
+    this.instrument.play();
   }
 
   stop() {

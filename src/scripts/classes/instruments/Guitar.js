@@ -1,4 +1,4 @@
-import { Sampler } from 'tone'
+import Instrument from '../Instrument'
 
 import Eb2 from '../../../sounds/guitar/Eb2.wav'
 import Gb2 from '../../../sounds/guitar/Gb2.wav'
@@ -12,34 +12,37 @@ import Eb4 from '../../../sounds/guitar/Eb4.wav'
 import Gb4 from '../../../sounds/guitar/Gb4.wav'
 import A4  from '../../../sounds/guitar/A4.wav'
 
-export default class Guitar {
+export default class Guitar extends Instrument {
   constructor() {
-    const notes = {
-      Eb2: Eb2,
-      Gb2: Gb2,
-      A2: A2,
-      C3: C3,
-      Eb3: Eb3,
-      Gb3: Gb3,
-      A3: A3,
-      C4: C4,
-      Eb4: Eb4,
-      Gb4: Gb4,
-      A4: A4,
+    const config = {
+      urls: {
+        Eb2: Eb2,
+        Gb2: Gb2,
+        A2: A2,
+        C3: C3,
+        Eb3: Eb3,
+        Gb3: Gb3,
+        A3: A3,
+        C4: C4,
+        Eb4: Eb4,
+        Gb4: Gb4,
+        A4: A4,
+      },
+      release: 0.2
     }
 
-    this.voices = {
-      '1': new Sampler(notes).toDestination(),
-      '2': new Sampler(notes).toDestination(),
-      '3': new Sampler(notes).toDestination(),
-      '4': new Sampler(notes).toDestination(),
-      '5': new Sampler(notes).toDestination(),
-      '6': new Sampler(notes).toDestination(),
-      '7': new Sampler(notes).toDestination()
-    };
+    super({
+      '1': config,
+      '2': config,
+      '3': config,
+      '4': config,
+      '5': config,
+      '6': config,
+      '7': config,
+    });
   }
 
-  play(strings = []) {
+  triggerSound(strings = []) {
     for (let key in this.voices) {
       this.voices[key].releaseAll();
     }
@@ -64,5 +67,9 @@ export default class Guitar {
     }
   }
 
-  stop() {}
+  stop() {
+    for (let key in this.voices) {
+      this.voices[key].releaseAll();
+    }
+  }
 }

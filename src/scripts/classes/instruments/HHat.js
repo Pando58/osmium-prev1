@@ -1,20 +1,21 @@
-import * as Tone from 'tone'
+import Instrument from '../Instrument'
+
 import hhat_open_01 from '../../../sounds/drum_kit/hhat/hhat_open_09.wav'
 
-export default class HHat {
+export default class HHat extends Instrument {
   constructor() {
-    this.sampler = new Tone.Sampler({
-      C3: hhat_open_01
-    }).toDestination();
+    super({
+      '1': {
+        C3: hhat_open_01
+      }
+    });
 
-    this.sampler.set({
+    this.voices['1'].set({
       volume: -11
     });
   }
 
-  play() {
-    this.sampler.triggerAttackRelease(['C3'], 5);
+  triggerSound() {
+    this.voices['1'].triggerAttack('C3');
   }
-
-  stop() {}
 }

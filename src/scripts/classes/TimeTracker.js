@@ -84,6 +84,8 @@ export default class Player {
     
     this.playing = true;
 
+    this.project.play();
+    
     requestAnimationFrame((timestamp) => {
       this.bar();
       this.beat();
@@ -93,6 +95,8 @@ export default class Player {
   }
 
   stop() {
+    if (!this.playing) return;
+
     this.playing = false;
     this.position = 0;
     this.musicalPosition.subbeat = 0;

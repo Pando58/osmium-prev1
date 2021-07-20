@@ -1,20 +1,21 @@
-import { Sampler } from 'tone'
+import Instrument from '../Instrument'
+
 import china_01 from '../../../sounds/drum_kit/china/china_01.wav'
 
-export default class China {
+export default class China extends Instrument {
   constructor() {
-    this.sampler = new Sampler({
-      C3: china_01
-    }).toDestination();
+    super({
+      '1': {
+        C3: china_01
+      }
+    });
 
-    this.sampler.set({
+    this.voices['1'].set({
       volume: -13
     });
   }
 
-  play() {
-    this.sampler.triggerAttackRelease(['C3'], 5);
+  triggerSound() {
+    this.voices['1'].triggerAttack('C3');
   }
-
-  stop() {}
 }
