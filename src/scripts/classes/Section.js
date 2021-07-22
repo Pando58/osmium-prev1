@@ -1,9 +1,11 @@
+import Riff from './Riff'
+
 export default class Section {
   constructor(start, end, subdivision, riff) {
     this.start = start;
     this.end = end;
     this.subdivision = subdivision;
-    this.riff = riff;
+    this.riff = new Riff(riff);
 
     this.step = -1;
   }
