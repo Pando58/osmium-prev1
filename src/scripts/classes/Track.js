@@ -1,3 +1,4 @@
+import { Channel } from 'tone'
 import Section from './Section'
 
 import Kick from './instruments/Kick'
@@ -9,14 +10,18 @@ import MidTom from './instruments/MidTom'
 import Guitar from './instruments/Guitar'
 
 export default class Track {
-  constructor(project, instrument) {
+  constructor(project, {instrument, volume, pan, mute} = {}) {
     this.project = project;
     this.ac = project.ac;
 
+    this.volume = volume;
+    this.pan = pan;
+    this.mute = mute;
+    
+    this.channel = new Channel(volume, pan).toDestination();
+
     this.sections = [];
     this.instrument = this.getInstrument(instrument);
-    
-    this.endTime = 0;
   }
 
   getInstrument(instrument) {
@@ -29,9 +34,12 @@ export default class Track {
       'midTom': MidTom,
       'guitar': Guitar
     };
-
+    
     if (map.hasOwnProperty(instrument)) {
-      return new map[instrument]();
+      const inst = new map[instrument]();
+      inst.connect(this.channel);
+
+      return inst;
     }
 
     return new Kick();
@@ -48,6 +56,8 @@ export default class Track {
 
 
   tick(time) {
+    if (this.mute) return;
+    
     this.sections.filter(i => i.start <= time && i.end > time).forEach(i => {
       const notes = i.getNotes(time);
 

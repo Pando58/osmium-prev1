@@ -12,10 +12,15 @@ export default class ProjectLoader {
     });
 
     file.tracks.forEach(i => {
-      const track = project.addTrack(i.instrument);
+      const track = project.addTrack({
+        instrument: i.instrument,
+        volume: i.volume || 0,
+        pan: i.pan || 0,
+        mute: i.mute || false,
+      });
 
       i.sections.forEach(j => {
-        const section = track.addSection({
+        track.addSection({
           start: j.start,
           end: j.end,
           subdivision: j.subdivision,

@@ -18,8 +18,13 @@ export default class Project {
     this.timeTracker = new TimeTracker(this);
   }
 
-  addTrack(instrument) {
-    const track = new Track(this, instrument);
+  addTrack({instrument, volume, pan, mute} = {}) {
+    const track = new Track(this, {
+      instrument: instrument,
+      volume: volume,
+      pan: pan,
+      mute: mute
+    });
     this.tracks.push(track);
 
     return track;

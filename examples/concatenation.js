@@ -37,6 +37,7 @@ export default {
     },
     {
       instrument: 'china',
+      volume: -3,
       sections: [
         {
           start: 0,
@@ -52,6 +53,7 @@ export default {
     },
     {
       instrument: 'crash',
+      pan: -0.3,
       sections: [
         {
           start: 0,
@@ -67,6 +69,7 @@ export default {
     },
     {
       instrument: 'guitar',
+      volume: -1.5,
       sections: [
         {
           start: 0,

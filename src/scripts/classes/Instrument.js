@@ -5,7 +5,13 @@ export default class Instrument {
     this.voices = {};
 
     for (let key in voices) {
-      this.voices[key] = new Sampler(voices[key]).toDestination();
+      this.voices[key] = new Sampler(voices[key]);
+    }
+  }
+
+  connect(channel) {
+    for (let key in this.voices) {
+      this.voices[key].connect(channel);
     }
   }
 
