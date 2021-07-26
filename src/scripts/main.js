@@ -2,7 +2,7 @@ import '../styles/main.scss'
 import * as Tone from 'tone'
 import ProjectLoader from './classes/ProjectLoader'
 
-import example from '../../examples/concatenation'
+import example from '../../examples/test'
 
 const project = ProjectLoader.openProject(example);
 

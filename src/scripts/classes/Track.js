@@ -59,10 +59,17 @@ export default class Track {
     if (this.mute) return;
     
     this.sections.filter(i => i.start <= time && i.end > time).forEach(i => {
-      const notes = i.getNotes(time);
+      const data = i.getData(time);
 
-      if (notes) {
-        this.instrument.triggerSound(notes);
+      if (data) {
+        const { pan, volume } = data.trackControls;
+
+        if (pan) this.channel.set({ pan: pan });
+        if (volume) this.channel.set({ volume: volume });
+        
+        if (data.notes.length > 0) {
+          this.instrument.triggerSound(data.notes, data.instrumentControls);
+        }
       }
     });
   }

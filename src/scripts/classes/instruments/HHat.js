@@ -9,13 +9,17 @@ export default class HHat extends Instrument {
         C3: hhat_open_01
       }
     });
-
-    this.voices['1'].set({
-      volume: -11
-    });
   }
 
-  triggerSound() {
-    this.voices['1'].triggerAttack('C3');
+  triggerSound(notes, controls) {
+    if (notes[0].note) {
+      if (notes[0].hasOwnProperty('volume')) {
+        this.voices['1'].set({
+          volume: this.volumeToDecibels(notes[0].volume)
+        });
+      }
+      
+      this.voices['1'].triggerAttack('C3');
+    }
   }
 }

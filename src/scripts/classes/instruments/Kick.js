@@ -11,7 +11,15 @@ export default class Kick extends Instrument {
     });
   }
 
-  triggerSound() {
-    this.voices['1'].triggerAttack('C3');
+  triggerSound(notes, controls) {
+    if (notes[0].note) {
+      if (notes[0].hasOwnProperty('volume')) {
+        this.voices['1'].set({
+          volume: this.volumeToDecibels(notes[0].volume)
+        });
+      }
+      
+      this.voices['1'].triggerAttack('C3');
+    }
   }
 }

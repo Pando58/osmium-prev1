@@ -10,7 +10,7 @@ export default class Section {
     this.step = -1;
   }
 
-  getNotes(time) {
+  getData(time) {
     const localTime = time - this.start;
     const nextStep = Math.floor(localTime * this.subdivision);
     
